@@ -1,26 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="logo">
+    <img alt="Vue logo" src="./assets/logo.png">
+  </div>
+  <div id="app">
+    <OfferDryTag/> 
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import OfferDryTag from "./views/OfferDryTag";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  name: "App",
+  components: { OfferDryTag }
 }
 </script>
 
 <style>
+
+#logo {
+  text-align: center;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  text-align: left;
   color: #2c3e50;
-  margin-top: 60px;
+  min-height: 100vh;
+  background-color: #F3F5FA;
 }
 </style>
+
+
+
