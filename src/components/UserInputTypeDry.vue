@@ -20,21 +20,30 @@ This is a component to create a little user interface to extract data through a 
                 <button class="item-details-textarea">Next</button>
                 <p></p>
             </form>
-
-            <form @submit.prevent="createPDFFromDataTable">
+        </div>
+    </div>
+    <div class="user">
+        <div class="user-data-submit">
+            <form @submit.prevent="createPDFFromDataTable(priceTagList)">
                 <button class="item-print-button">Create PDF</button>
             </form>
+            <p></p>
+            <form @submit.prevent="clearDataFromTable">
+                <button class="item-print-button">Clear Table</button>
+            </form>
         </div>
-
-
-
     </div>
+
+    <!-- <div class="user" v-for="(priceTag, index) in priceTagList" :key="index">
+        {{ priceTag.name }} {{ priceTag.retailPrice }} {{ priceTag.offerPrice }} {{ priceTag.packing }} {{ priceTag.expiryDate }} 
+    </div> -->
+
 </template>
 
 <script>
 export default {
     name: "UserInputTypeDry",
-    
+    emits: ["price-list"],
     data() {
         return {
             itemDescriptionString: "",
@@ -49,6 +58,27 @@ export default {
                     offerPrice: "",
                     packing: "",
                     expiryDate:""
+                }, 
+                {
+                    name: "testname",
+                    retailPrice: "testprice",
+                    offerPrice: "testofperice",
+                    packing: "testpacking",
+                    expiryDate:"testepxiry"
+                }, 
+                {
+                    name: "testnrr4234ame",
+                    retailPrice: "testprrwerice",
+                    offerPrice: "testofpwrwererice",
+                    packing: "testpacewrwerking",
+                    expiryDate:"testeprwerwerxiry"
+                },
+                {
+                    name: "testna23423me",
+                    retailPrice: "te324234stprice",
+                    offerPrice: "teswertofperice",
+                    packing: "testp2342acking",
+                    expiryDate:"teste324234pxiry"
                 }
             ]
 
@@ -85,13 +115,61 @@ export default {
                 console.log(val.length)
             }
         }
+    }, 
+    methods: {
+        addDataToTable() {
+            // get data from the user input box
+            let name = this.itemDescriptionString;
+            let retailPrice = this.itemNormalRetailPriceString;
+            let offerPrice = this.itemSpecialOfferPriceString;
+            let packing = this.itemPackingString;
+            let expiry = this.itemExpiryDateString;
+
+            // only proceed to cleaning up the data if all text fields have been used
+            if(name && retailPrice && offerPrice && packing && expiry) {
+
+                // remove the white space form the front and the end of the string
+                name = name.trim();
+                retailPrice = retailPrice.trim();
+                offerPrice = offerPrice.trim();
+                packing = packing.trim();
+                expiry = expiry.trim();
+
+                // push the cleaned data into the array of pricelist objects
+                this.priceTagList.push(
+                    {
+                        name: name,
+                        retailPrice: retailPrice,
+                        offerPrice: offerPrice,
+                        packing: packing,
+                        expiryDate: expiry
+                    }
+                )
+
+                // remove the user input and prepare the ui for the next price tag object
+                this.itemDescriptionString = "";
+                this.itemNormalRetailPriceString = "";
+                this.itemSpecialOfferPriceString = "";
+                this.itemPackingString = "";
+                this.itemExpiryDateString = "";
+            }
+
+        },
+        createPDFFromDataTable(priceTagList) {
+            // this method passes the priceTagList array to the OfferDryTag.vue component
+            if(this.priceTagList.length > 1) {
+                this.$emit("price-list", priceTagList);
+            }
+        }, 
+        clearDataFromTable() {
+            // TODO: needs a confirmation before the table is reset
+            this.priceTagList.length = 1;
+        }
+
     }
 
 
 }
-
-// a mechanism for taking the user input, trimming the white spaces, and putting it
-// inside an array object has to be implemented
 
 </script>
 
@@ -122,6 +200,20 @@ export default {
 
 .item-print-button {
     min-width: 300px;
+}
+
+.user-data-submit {
+    position:relative; 
+    top:-90px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #dfe3df;
+    min-width: 300px;
+    text-align: center;
 }
 
 </style>

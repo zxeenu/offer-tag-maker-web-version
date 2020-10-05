@@ -11,8 +11,14 @@ It will need a loading screen while the pdf is generated
 
 <template>
   <div>
-    <UserInputTypeDry/> 
+    <UserInputTypeDry @price-list="displayTableItems"/> 
+
+    <form @submit.prevent="test">
+        <button >test</button>
+    </form>
   </div>
+  
+
 </template>
 
 <script>
@@ -20,7 +26,26 @@ import UserInputTypeDry from "../components/UserInputTypeDry";
 
 export default {
   name: "OfferDryTag",
-  components: { UserInputTypeDry }
+  components: { UserInputTypeDry },
+  data() {
+    return {
+      priceTagList_: []
+    }
+  },
+  methods: {
+    displayTableItems(priceTagList) {
+
+      // the printing part is for testing
+      priceTagList.forEach(function(tagItem) {
+        console.log(tagItem);
+      })
+
+      this.priceTagList_ = priceTagList;
+    },
+    test() {
+      this.priceTagList_.length = 1;
+    }
+  }
 }
 </script>
 
