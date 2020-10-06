@@ -24,7 +24,7 @@ This is a component to create a little user interface to extract data through a 
     </div>
     <div class="user">
         <div class="user-data-submit">
-            <form @submit.prevent="createPDFFromDataTable(priceTagList)">
+            <form @submit.prevent="createPDFFromDataTable">
                 <button class="item-print-button">Create PDF</button>
             </form>
             <p></p>
@@ -33,11 +33,6 @@ This is a component to create a little user interface to extract data through a 
             </form>
         </div>
     </div>
-
-    <!-- <div class="user" v-for="(priceTag, index) in priceTagList" :key="index">
-        {{ priceTag.name }} {{ priceTag.retailPrice }} {{ priceTag.offerPrice }} {{ priceTag.packing }} {{ priceTag.expiryDate }} 
-    </div> -->
-
 </template>
 
 <script>
@@ -52,13 +47,6 @@ export default {
             itemPackingString: "",
             itemExpiryDateString: "",
             priceTagList: [
-                {
-                    name: "",
-                    retailPrice: "",
-                    offerPrice: "",
-                    packing: "",
-                    expiryDate:""
-                }, 
                 {
                     name: "testname",
                     retailPrice: "testprice",
@@ -155,17 +143,19 @@ export default {
             }
 
         },
-        createPDFFromDataTable(priceTagList) {
-            // this method passes the priceTagList array to the OfferDryTag.vue component
-            if(this.priceTagList.length > 1) {
-                this.$emit("price-list", priceTagList);
-            }
+        createPDFFromDataTable() {
+            this.priceTagList.forEach(function(obj) {
+                console.log(obj);
+            })
         }, 
         clearDataFromTable() {
             // TODO: needs a confirmation before the table is reset
-            this.priceTagList.length = 1;
+            this.priceTagList.length = 0;
         }
 
+    },
+    mounted() {
+        this.$emit("price-list", this.priceTagList);
     }
 
 
