@@ -47,27 +47,38 @@ export default {
             itemPackingString: "",
             itemExpiryDateString: "",
             priceTagList: [
-                {
-                    name: "testname",
-                    retailPrice: "testprice",
-                    offerPrice: "testofperice",
-                    packing: "testpacking",
-                    expiryDate:"testepxiry"
-                }, 
-                {
-                    name: "testnrr4234ame",
-                    retailPrice: "testprrwerice",
-                    offerPrice: "testofpwrwererice",
-                    packing: "testpacewrwerking",
-                    expiryDate:"testeprwerwerxiry"
-                },
-                {
-                    name: "testna23423me",
-                    retailPrice: "te324234stprice",
-                    offerPrice: "teswertofperice",
-                    packing: "testp2342acking",
-                    expiryDate:"teste324234pxiry"
-                }
+                // {   
+                //     id: 1,
+                //     name: "testname",
+                //     retailPrice: "testprice",
+                //     offerPrice: "testofperice",
+                //     packing: "testpacking",
+                //     expiryDate:"testepxiry"
+                // }, 
+                // {   
+                //     id: 2,
+                //     name: "testnrr4234ame",
+                //     retailPrice: "testprrwerice",
+                //     offerPrice: "testofpwrwererice",
+                //     packing: "testpacewrwerking",
+                //     expiryDate:"testeprwerwerxiry"
+                // },
+                // {
+                //     id: 3,
+                //     name: "testna23423me",
+                //     retailPrice: "te324234stprice",
+                //     offerPrice: "teswertofperice",
+                //     packing: "testp2342acking",
+                //     expiryDate:"teste324234pxiry"
+                // },
+                // {
+                //     id: 4,
+                //     name: "testna23423me",
+                //     retailPrice: "te324234stprice",
+                //     offerPrice: "teswertofperice",
+                //     packing: "testp2342acking",
+                //     expiryDate:"teste324234pxiry"
+                // }
             ]
 
         }
@@ -126,6 +137,7 @@ export default {
                 // push the cleaned data into the array of pricelist objects
                 this.priceTagList.push(
                     {
+                        id: this.priceTagList.length + 1,
                         name: name,
                         retailPrice: retailPrice,
                         offerPrice: offerPrice,

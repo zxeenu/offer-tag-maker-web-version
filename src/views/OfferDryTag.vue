@@ -20,9 +20,13 @@ It will need a loading screen while the pdf is generated
         <button >test - print list</button>
       </form> -->
     </div>
-    <div class="data-table-wrapper">
+    <!-- <div class="data-table-wrapper">
       <DataTable :tagDataList="priceTagList_" />
-    </div>
+    </div> -->
+  </div>
+  
+  <div class="data-table-wrapper">
+    <DataTable :tagDataList="priceTagList_" @price-tag-to-delete="deleteFromTagList"/>
   </div>
 
 
@@ -47,12 +51,20 @@ export default {
       // connects the priceTagList array to the priceTagList_ array
       this.priceTagList_ = priceTagList;
     },
+    deleteFromTagList(tagDataSelected) {
+      // this.priceTagList_ = this.priceTagList_.filter(x => x.id !== tagDataSelected.id); 
+      // filter doesnt work, as after deleting with filer, the object reference is lost, and we cant add new items to the list
+      var removeIndex = this.priceTagList_.map(item => item.id)
+                       .indexOf(tagDataSelected.id);
+
+      ~removeIndex && this.priceTagList_.splice(removeIndex, 1);
+    },
     test() {
       this.priceTagList_.length = 0;
     },
     test2() {
       this.priceTagList_.forEach(function (obj) {
-        console.log(obj);
+        console.log(obj.name + obj.retailPrice + obj.offerPrice + obj.packing + obj.expiryDate + obj.id);
       })
     }
   },
