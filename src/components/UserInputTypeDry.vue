@@ -25,6 +25,7 @@ This is a component to create a little user interface to extract data through a 
     <div class="user">
         <div class="user-data-submit">
             <form @submit.prevent="createPDFFromDataTable">
+                <!-- <div v-if="loadingIndicator"> <Circle></Circle> </div> -->
                 <button class="item-print-button">Create PDF</button>
             </form>
             <p></p>
@@ -36,6 +37,10 @@ This is a component to create a little user interface to extract data through a 
 </template>
 
 <script>
+
+import * as pdfz from '../assets/PdfLogic';
+// import {Circle} from 'vue-loading-spinner';
+
 export default {
     name: "UserInputTypeDry",
     emits: ["price-list"],
@@ -46,42 +51,12 @@ export default {
             itemSpecialOfferPriceString: "",
             itemPackingString: "",
             itemExpiryDateString: "",
-            priceTagList: [
-                // {   
-                //     id: 1,
-                //     name: "testname",
-                //     retailPrice: "testprice",
-                //     offerPrice: "testofperice",
-                //     packing: "testpacking",
-                //     expiryDate:"testepxiry"
-                // }, 
-                // {   
-                //     id: 2,
-                //     name: "testnrr4234ame",
-                //     retailPrice: "testprrwerice",
-                //     offerPrice: "testofpwrwererice",
-                //     packing: "testpacewrwerking",
-                //     expiryDate:"testeprwerwerxiry"
-                // },
-                // {
-                //     id: 3,
-                //     name: "testna23423me",
-                //     retailPrice: "te324234stprice",
-                //     offerPrice: "teswertofperice",
-                //     packing: "testp2342acking",
-                //     expiryDate:"teste324234pxiry"
-                // },
-                // {
-                //     id: 4,
-                //     name: "testna23423me",
-                //     retailPrice: "te324234stprice",
-                //     offerPrice: "teswertofperice",
-                //     packing: "testp2342acking",
-                //     expiryDate:"teste324234pxiry"
-                // }
-            ]
-
+            priceTagList: []
+            // loadingIndicator: false
         }
+    },
+    components: {
+        // Circle
     },
     watch: {
         itemDescriptionString: function(val) {
@@ -134,6 +109,35 @@ export default {
                 packing = packing.trim();
                 expiry = expiry.trim();
 
+
+                // if only . decimal is there, add 00
+                const regex_three = /[.]$/
+                let testRetail_three = regex_three.test(retailPrice);
+                let testOffer_three = regex_three.test(offerPrice);
+                if (testRetail_three) {
+                    retailPrice += "00";
+                }
+                if (testOffer_three) {
+                    offerPrice += "00";
+                }
+
+                // if with decimals missing from the prices add them
+                const regex_one = /^((?![.]).)*$/
+                let testRetail_one = regex_one.test(retailPrice);
+                let testOffer_one = regex_one.test(offerPrice);
+
+                if (testRetail_one) {
+                    retailPrice += ".00";
+                }
+                if (testOffer_one) {
+                    offerPrice += ".00";
+                }
+
+                // if only 1 decimal is there
+                
+
+
+
                 // push the cleaned data into the array of pricelist objects
                 this.priceTagList.push(
                     {
@@ -152,22 +156,33 @@ export default {
                 this.itemSpecialOfferPriceString = "";
                 this.itemPackingString = "";
                 this.itemExpiryDateString = "";
+            } else {
+                window.alert("Hi, you didn't fill out all the input boxes! 😢");
             }
 
         },
         createPDFFromDataTable() {
-            this.priceTagList.forEach(function(obj) {
-                console.log(obj);
-            })
+            if (this.priceTagList.length >= 1) {
+                // this.loadingIndicator = true;
+                pdfz.tag_maker_vue(this.priceTagList);
+                // this.loadingIndicator = false;
+            } else {
+               window.alert("Hi, you need some data before you can create the PDF! 🤔");
+            }
         }, 
         clearDataFromTable() {
-            // TODO: needs a confirmation before the table is reset
-            this.priceTagList.length = 0;
+            if (this.priceTagList.length >= 1) {
+                this.priceTagList.length = 0;
+            } else {
+               window.alert("Hi, you need some data before you clear the table! 🤔");
+            }
+            
         }
 
     },
     mounted() {
         this.$emit("price-list", this.priceTagList);
+
     }
 
 

@@ -1,20 +1,20 @@
 <template>
-  <div>
+  <div v-if="tagDataList.length >= 1">
         <div class="flex-table-heading">
-          <div><strong>ITEM NAME</strong></div>
-          <div><strong>RETAIL PRICE</strong></div>
-          <div><strong>OFFER PRICE</strong></div>
-          <div><strong>PACKING</strong></div>
-          <div><strong>EXPIRY DATE</strong></div>
-      </div>
-      <div v-for="(tagData, index) in tagDataList" :key="index" class="flex-table">
-          <div>{{ tagData.name }}</div>
-          <div>{{ tagData.retailPrice }}</div>
-          <div>{{ tagData.offerPrice }}</div>
-          <div>{{ tagData.packing }}</div>
-          <div>{{ tagData.expiryDate }}</div>
+            <div><strong>ITEM NAME</strong></div>
+            <div><strong>RETAIL PRICE</strong></div>
+            <div><strong>OFFER PRICE</strong></div>
+            <div><strong>PACKING</strong></div>
+            <div><strong>EXPIRY DATE</strong></div>
+        </div>
+        <div v-for="(tagData, index) in tagDataList" :key="index" class="flex-table">
+            <div>{{ tagData.name }}</div>
+            <div>{{ tagData.retailPrice }}</div>
+            <div>{{ tagData.offerPrice }}</div>
+            <div>{{ tagData.packing }}</div>
+            <div>{{ tagData.expiryDate }}</div>
           <div><form @submit.prevent="deleteItem(tagData)"><button>Delete</button></form></div>
-      </div>
+        </div>
   </div>
 </template>
 
@@ -47,7 +47,9 @@ export default {
 
 .flex-table {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 16%);
+    grid-template-columns: repeat(auto-fill, 18%);
+    grid-template-rows: repeat(auto-fill, 14%);
+    overflow-wrap: break-word;
     font-size: 90%;
     padding: 10px;
     border-bottom: 1px black solid;
@@ -67,12 +69,11 @@ export default {
 .flex-table-heading {
     display: grid;
     font-size: 100%;
-    grid-template-columns: repeat(auto-fill, 16%);
+    grid-template-columns: repeat(auto-fill, 18%);
+    grid-template-rows: repeat(auto-fill, 14%);
     padding: 10px;
     border-bottom: 1px black solid;
 
 }
-
-
 
 </style>
