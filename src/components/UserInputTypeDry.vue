@@ -109,6 +109,13 @@ export default {
                 packing = packing.trim();
                 expiry = expiry.trim();
 
+                // turn input into upper case
+                name = name.toUpperCase();
+                retailPrice = retailPrice.toUpperCase();
+                offerPrice = offerPrice.toUpperCase();
+                packing = packing.toUpperCase();
+                expiry = expiry.toUpperCase();
+
 
                 // if only . decimal is there, add 00
                 const regex_three = /[.]$/
