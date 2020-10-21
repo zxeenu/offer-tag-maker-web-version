@@ -25,7 +25,7 @@ class OfferTagFactory {
 
         let pic_width = 23;
         let pic_height = 23;
-        this.pdf_canvass.addImage(this.cross_picture, "jpeg", 43+x_offset, 35+y_offset, pic_width, pic_height, "CROSS", "FAST");
+        this.pdf_canvass.addImage(this.cross_picture, "jpeg", 43+x_offset, 37+y_offset, pic_width, pic_height, "CROSS", "FAST");
 
         // draw the rectangle and border for the tag
         this.pdf_canvass.setLineWidth(0.7);

@@ -72,7 +72,7 @@ export default {
 }
 
 .data-table-wrapper {
-  flex: 4;
+  flex: 1;
 }
 
 </style>

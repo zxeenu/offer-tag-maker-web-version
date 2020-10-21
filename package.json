@@ -44,5 +44,10 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "git": {
+    "scripts": {
+      "pre-push": "surge dist ./ --domain defective-geese.surge.sh"
+    }
+  }
 }

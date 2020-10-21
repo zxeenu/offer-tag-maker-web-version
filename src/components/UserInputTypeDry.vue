@@ -7,15 +7,15 @@ This is a component to create a little user interface to extract data through a 
         <div class="user-data-entry">
             <form @submit.prevent="addDataToTable">
                 <p><strong>Item Description</strong></p>
-                <input class="item-details-textarea" v-model="itemDescriptionString"/>
+                <input class="item-details-textarea" v-model="itemDescriptionString" autofocus placeholder="Put the product name here.."/>
                 <p><strong>Normal Retail Price</strong></p>
-                <input class="item-details-textarea" v-model="itemNormalRetailPriceString"/>
+                <input class="item-details-textarea" v-model="itemNormalRetailPriceString" placeholder="The full retail price...."/>
                 <p><strong>Special Offer Price</strong></p>
-                <input class="item-details-textarea" v-model="itemSpecialOfferPriceString"/>
+                <input class="item-details-textarea" v-model="itemSpecialOfferPriceString" placeholder="The discounted promotional price...."/>
                 <p><strong>Packing</strong></p>
-                <input class="item-details-textarea" v-model="itemPackingString"/>
+                <input class="item-details-textarea" v-model="itemPackingString" placeholder="The packing, ie, the weight of the item...."/>
                 <p><strong>Item Expiry Date</strong></p>
-                <input class="item-details-textarea" v-model="itemExpiryDateString"/>
+                <input class="item-details-textarea" v-model="itemExpiryDateString" placeholder="And the due date.... then Click 'NEXT' "/>
                 <p></p>
                 <button class="item-details-textarea">Next</button>
                 <p></p>
@@ -164,7 +164,7 @@ export default {
                 this.itemPackingString = "";
                 this.itemExpiryDateString = "";
             } else {
-                window.alert("Hi, you didn't fill out all the input boxes! 😢");
+                // window.alert("Hi, you didn't fill out all the input boxes! 😢");
             }
 
         },
