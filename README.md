@@ -22,3 +22,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Check out live version!
+```
+http://defective-geese.surge.sh/ 
+```
